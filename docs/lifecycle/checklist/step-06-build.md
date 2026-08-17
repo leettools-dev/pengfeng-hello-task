@@ -47,7 +47,16 @@ Progress Log current.
   (`.agents/environments.json`), so "early" here means the production-shaped
   local rehearsal (`deploy.prerelease-rehearsal`, step 11) doubles as the early
   preview since there is no separate persistent preview target.
-- Status: PENDING
+- Status: MET — Deployed to the only persistent target this venture has, the
+  production domain `hello-task.pengfeng.leettools.ai`
+  (`leet-deploy edge apply` built and installed the app on VM
+  `hello-task-pengfeng-leettools-ai`; `leet-deploy edge reconcile`-equivalent
+  applied the GCP HTTPS load balancer, TLS certificate, and GoDaddy DNS A
+  record). Reachable URL: `https://hello-task.pengfeng.leettools.ai/`.
+  Captured smoke check, 2026-08-17: `curl -sS https://hello-task.pengfeng.leettools.ai/`
+  → `200`, body `<!doctype html>...<p>Hello, Venture!</p>...`. This is the
+  same live deployment recorded under step 11's
+  `deploy.smoke-critical-flows.look`.
 
 ## ui.theming.dark-light — Every screen renders in light and dark  [must]
 

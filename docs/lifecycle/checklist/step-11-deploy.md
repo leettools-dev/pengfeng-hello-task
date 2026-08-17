@@ -84,7 +84,12 @@ having just re-run the preflight itself.
 - Evidence required: The health-check response against the deployed environment.
 - Counterexample: The app is "deployed" but its health endpoint returns 503.
 - Applies when: The step runs.
-- Status: PENDING
+- Status: MET — `curl -sS -o /dev/null -w "%{http_code}"
+  https://hello-task.pengfeng.leettools.ai/health` against the live production
+  URL (VM `hello-task-pengfeng-leettools-ai`, GCP external HTTPS load
+  balancer, IP `34.36.232.47`) returned `200` with body `{"status":"ok"}`,
+  2026-08-17 — the actual deployed instance behind the production domain, not
+  the earlier local rehearsal container.
 
 ## deploy.smoke-critical-flows.look — Critical flow "Look" smoke-tested on the environment  [must]
 
@@ -97,7 +102,12 @@ having just re-run the preflight itself.
   error and nobody checked.
 - Applies when: The step runs. Expand per critical flow.
 - Applicability: PRD §Primary flow names exactly one critical flow: "Look."
-- Status: PENDING
+- Status: MET — `curl -sS https://hello-task.pengfeng.leettools.ai/` (rehearsal
+  already recorded under `deploy.prerelease-rehearsal`) returned `200` with
+  body `<!doctype html>...<p>Hello, Venture!</p>...` from the live production
+  URL, 2026-08-17. Confirmed over HTTPS with a valid certificate (see
+  `deploy.long-lived-dependencies.tls-certificate`), not `--insecure` or an IP
+  literal.
 
 ## deploy.error-observation — Error rate watched after cutover  [must]
 
@@ -107,12 +117,19 @@ having just re-run the preflight itself.
 - Counterexample: "apply" exits 0, everyone leaves, and error rate spikes
   unnoticed.
 - Applies when: The step runs.
-- Status: PENDING
+- Status: MET — Polled `https://hello-task.pengfeng.leettools.ai/health` and
+  `/` every ~28s for 20 rounds (~9.5 minutes, 2026-08-17T20:16:42Z through
+  2026-08-17T20:25:45Z) immediately after the production edge-stack cutover.
+  20/20 requests to both endpoints returned `200`; latency stayed in the
+  0.15s-0.88s range with no timeouts or 5xx responses. Raw sequence (http_code,
+  seconds): health and root both `200` on every sample, e.g.
+  `20:16:42Z health=200 0.175 root=200 0.148` ... `20:25:45Z health=200 0.172
+  root=200 0.179`.
 - Note: No telemetry sink is available (`.agents/capabilities.json` probe
-  `telemetry-sink` = `unavailable`), so this observation must be done via
-  direct polling of `/health` and `/` on the deployed URL for the ~10 minute
-  window rather than a dashboard query — see `ops.telemetry-flowing` (step 13)
-  for the recorded capability gap.
+  `telemetry-sink` = `unavailable`), so this observation was done via direct
+  polling of `/health` and `/` on the deployed URL for the ~10 minute window
+  rather than a dashboard query — see `ops.telemetry-flowing` (step 13) for
+  the recorded capability gap; that step is out of dev-cycle scope.
 
 ## deploy.rollback-confirmed — A rollback path exists and is known  [must]
 
@@ -121,7 +138,6 @@ having just re-run the preflight itself.
 - Evidence required: The rollback command/procedure, confirmed available.
 - Counterexample: A bad deploy has no way back except a manual rebuild.
 - Applies when: The step runs.
-- Status: PENDING
 - Status: MET — `deploy/production/README.md` now documents the rollback
   procedure: check out the previous good commit and re-run the same
   `leet-deploy edge apply` command (rebuilds the image from that commit's
@@ -187,4 +203,30 @@ having just re-run the preflight itself.
   `deploy_target: leet-deploy` with a domain
   (`hello-task.pengfeng.leettools.ai`) — TLS certificate issuance/renewal is
   in scope via `leet-deploy`/`leet-ssl-cert` (`.agents/toolchain.json`).
-- Status: PENDING
+- Status: MET — A real Let's Encrypt production certificate was issued and is
+  live: `openssl`-equivalent read via Node `X509Certificate` on the stored
+  bundle shows `subject=CN=hello-task.pengfeng.leettools.ai`,
+  `issuer=Let's Encrypt (CN=YR1)`, `validFrom=2026-08-17`,
+  `validTo=2026-11-15` (90-day horizon), matching what the live edge serves
+  (`deploy.smoke-critical-flows.look` above passed HTTPS validation with no
+  `--insecure`). Renewal configuration: `leet-ssl-cert`'s
+  `acme.renewal_days` = 30 (its documented default) — certificates renew once
+  fewer than 30 days remain. Exercised the actual renewal decision path
+  in-process against the deployed certificate (`CertificateService.issue`,
+  the same code `leet-deploy`'s edge stack calls): a non-forced run correctly
+  reports `action: "skip", reason: "89 days remaining"` (not due yet), and a
+  forced dry run reports `action: "dry-run", reason: "would issue or renew
+  certificate"` — confirming the renewal path activates correctly when due,
+  without mutating the live certificate now. The deployed certificate is
+  bound to the live `targetHttpsProxy`
+  (`hello-task-pengfeng-leettools-ai-https-proxy`) per its stored
+  `last_deploy.gcp_lb` metadata, so "the serving edge picked up the value"
+  is the same fact already verified by the passing HTTPS smoke test above.
+- Known deviation (dev-cycle scope): an independent expiry/failure alert is
+  not wired up. `.agents/capabilities.json` probe `telemetry-sink` =
+  `unavailable`, and alerting is step 13 (`ops.telemetry-flowing`,
+  `ops-defining-alerts-and-slos`), explicitly out of scope for `dev-cycle`
+  per `.agents/prompts/work-dev-cycle.md` ("Step 13 operations, alerts,
+  SLOs..."). The certificate's 90-day horizon and confirmed renewal-decision
+  logic mean the dev-cycle-scoped deployment does not have a near-term outage
+  date; a full-lifecycle pass should add the independent alert.
