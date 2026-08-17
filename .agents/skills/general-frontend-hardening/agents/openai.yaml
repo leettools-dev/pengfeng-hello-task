@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Hardening"
+  short_description: "Make UI robust in real use"
+  default_prompt: "Use $general-frontend-hardening to make this frontend feature resilient to edge cases and failures."

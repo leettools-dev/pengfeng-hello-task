@@ -1,0 +1,4 @@
+interface:
+  display_name: "Responsive UI"
+  short_description: "Adapt UI across screens and inputs"
+  default_prompt: "Use $general-frontend-responsive-design to make this interface work across viewport sizes, zoom, keyboard, and touch."

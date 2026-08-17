@@ -1,0 +1,4 @@
+interface:
+  display_name: "TypeScript React Frontends"
+  short_description: "Build React 19 + TypeScript frontends (default stack)"
+  default_prompt: "Use $frontend-typescript-building-react-frontends to implement a React 19 + TypeScript frontend following the recommended stack conventions."

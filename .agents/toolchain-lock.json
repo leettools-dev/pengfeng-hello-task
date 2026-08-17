@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "generated_at": null,
+  "product_root": ".",
+  "runtime": {
+    "node": {
+      "nvmrc": "24",
+      "engines": ">=24"
+    },
+    "package_manager": {
+      "declaration": "npm@11.6.2",
+      "lockfile": "package-lock.json"
+    }
+  },
+  "utility_repos": [],
+  "installed_skills": {
+    "generated_at": "2026-08-17T05:34:44.200Z",
+    "skills": [
+      {
+        "name": "backend-typescript-building-fastify-services",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "code-respond-to-feedbacks",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "cut-release",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "dev-cycle-managing-roadmaps",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "dev-cycle-planning-implementation",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "dev-cycle-synthesizing-research",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "dev-cycle-writing-dev-specs",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "frontend-typescript-building-react-frontends",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-delivering-changes-with-git",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-designing-apis",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-diagramming-architecture",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-frontend-audit",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-frontend-design",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-frontend-hardening",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-frontend-responsive-design",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-frontend-ux-copy",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-frontend-verify",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-handling-errors",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-instrumenting-product-analytics",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-managing-configuration",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-managing-design-tokens",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-migrating-data-schemas",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-operating-safely",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-performance-optimization",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-reviewing-design-with-aposd",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-setting-up-observability",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-testing-strategies",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "general-writing-commit-messages",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "gtm-generating-launch-artifacts",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "gtm-writing-release-communications",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "gtm-writing-sales-collateral",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "gtm-writing-user-documentation",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "leet-development-foreman",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "ops-defining-alerts-and-slos",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "ops-responding-to-incidents",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "pr",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "security-designing-authentication",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "security-designing-authorization",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "system-deploying-environments",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "system-developing-with-docker",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "system-integrating-git-hosting",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "system-managing-domains-and-tls",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "testing-typescript-applications",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "testing-with-playwright",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      },
+      {
+        "name": "typescript-implementing-logging",
+        "layer": "lifecycle",
+        "source": "leet-dev-guides",
+        "commit": null
+      }
+    ]
+  }
+}

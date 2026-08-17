@@ -1,0 +1,4 @@
+interface:
+  display_name: "Playwright Testing"
+  short_description: "Build reliable browser tests with Playwright"
+  default_prompt: "Use $testing-with-playwright to create or improve reliable Playwright tests for this application flow."

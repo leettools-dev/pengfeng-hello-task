@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance Optimization"
+  short_description: "Find and fix measured bottlenecks"
+  default_prompt: "Use $general-performance-optimization to identify and improve the real performance bottleneck."

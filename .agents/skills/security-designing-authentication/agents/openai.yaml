@@ -1,0 +1,4 @@
+interface:
+  display_name: "Authentication Design"
+  short_description: "Design secure application authentication"
+  default_prompt: "Use $security-designing-authentication to select and specify a secure authentication model for this application."

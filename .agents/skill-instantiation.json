@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "profile": {
+    "language": [
+      "typescript"
+    ],
+    "backend": [
+      "fastify"
+    ],
+    "frontend": [
+      "react"
+    ],
+    "deploy_target": [
+      "gcp"
+    ]
+  },
+  "product_overlays_path": ".agents/skill-overlays",
+  "output_path": ".agents/skills",
+  "harnesses": [
+    ".claude/skills"
+  ],
+  "include": [
+    "backend-typescript-building-fastify-services",
+    "dev-cycle-managing-roadmaps",
+    "dev-cycle-planning-implementation",
+    "dev-cycle-synthesizing-research",
+    "dev-cycle-writing-dev-specs",
+    "frontend-typescript-building-react-frontends",
+    "general-delivering-changes-with-git",
+    "general-designing-apis",
+    "general-handling-errors",
+    "general-instrumenting-product-analytics",
+    "general-managing-configuration",
+    "general-migrating-data-schemas",
+    "general-operating-safely",
+    "general-setting-up-observability",
+    "general-testing-strategies",
+    "gtm-generating-launch-artifacts",
+    "gtm-writing-release-communications",
+    "gtm-writing-sales-collateral",
+    "gtm-writing-user-documentation",
+    "ops-defining-alerts-and-slos",
+    "ops-responding-to-incidents",
+    "security-designing-authentication",
+    "security-designing-authorization",
+    "system-deploying-environments",
+    "system-developing-with-docker",
+    "system-managing-domains-and-tls",
+    "testing-typescript-applications",
+    "testing-with-playwright",
+    "typescript-implementing-logging"
+  ],
+  "exclude": []
+}

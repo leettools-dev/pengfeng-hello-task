@@ -1,0 +1,32 @@
+# <type>(<scope>): <subject (max 50 chars)>
+#
+# <body: explain what and why, wrap at 72 chars>
+#
+# <footer: reference issues, breaking changes, co-authors>
+#
+# Type: feat, fix, docs, style, refactor, perf, test, chore, ci, build
+# Scope: optional, component/module name
+#
+# Subject:
+#   - Use imperative mood ("add" not "added")
+#   - No period at the end
+#   - Keep under 50 characters
+#
+# Body:
+#   - Explain what changed and why
+#   - Contrast with previous behavior
+#   - Wrap at 72 characters
+#
+# Footer:
+#   - Reference issues: Fixes #123, Closes #456
+#   - Breaking changes: BREAKING CHANGE: description
+#   - Co-authors: Co-authored-by: Name <email>
+#
+# Example:
+# feat(auth): add JWT token refresh endpoint
+#
+# Add /api/auth/refresh endpoint to allow users to refresh their
+# authentication tokens without re-entering credentials. Tokens
+# expire after 1 hour and can be refreshed within 24 hours.
+#
+# Closes #234

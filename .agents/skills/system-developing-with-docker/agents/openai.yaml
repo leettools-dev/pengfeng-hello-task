@@ -1,0 +1,4 @@
+interface:
+  display_name: "Docker Development"
+  short_description: "Build and run projects with Docker"
+  default_prompt: "Use $system-developing-with-docker to help me containerize or run this project with Docker."

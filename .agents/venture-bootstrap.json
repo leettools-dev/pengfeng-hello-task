@@ -1,0 +1,294 @@
+{
+  "schema": "leet.venture.bootstrap/1",
+  "digest": "1e719a6987db01477a1ce54162b1d22ddcef9805a4d3e191076730a9033c7ee0",
+  "artifacts": [
+    {
+      "path": ".agents/capabilities.json",
+      "sha256": "3dc6f3179c12193812fc3697ef2a2d017d1b808d427a4fba9d5b80114eaa6cc3"
+    },
+    {
+      "path": ".agents/environments.json",
+      "sha256": "8f7565dffe6a8b1a90d1555cffce6d94d89a10c8645e18a3552b0efda0ca8262"
+    },
+    {
+      "path": ".agents/prompts/instantiate-lifecycle.md",
+      "sha256": "e5b2a7c5c65dbd7af0257dbf9b12269e6699bf25d7aec696167c886b0d56c674"
+    },
+    {
+      "path": ".agents/prompts/work-dev-cycle.md",
+      "sha256": "c184c8f6b2bb2e8bfb7dac91616302368041df97c63eb99e6dcb66b1082b71fa"
+    },
+    {
+      "path": ".agents/prompts/work-lifecycle.md",
+      "sha256": "5e12ed0e0eb175738bcca57e0587ccbf2c2ca9ccf4d2beb05803055d7d2bc46c"
+    },
+    {
+      "path": ".agents/skill-instantiation.json",
+      "sha256": "aaf6538c26d0a45dca686c3d1ef308699c1668dd26d9afaf053f03e880839cc4"
+    },
+    {
+      "path": ".agents/skills/backend-typescript-building-fastify-services/SKILL.md",
+      "sha256": "496d360ac05623b57a7355151a6d22119be37bda5f1d9683cf1e43c8f7275641"
+    },
+    {
+      "path": ".agents/skills/code-respond-to-feedbacks/SKILL.md",
+      "sha256": "29a3b15ccc40e96063a5e4bb84d6c6d63294ce9481fc662c75e913e3d32b3f87"
+    },
+    {
+      "path": ".agents/skills/cut-release/SKILL.md",
+      "sha256": "fe4c9eb9a7f58b8f7988dc2a6d8c4872aaa01a68990c0d69714ca539858a0b60"
+    },
+    {
+      "path": ".agents/skills/dev-cycle-managing-roadmaps/SKILL.md",
+      "sha256": "23e6f929c29a23a74ceec52cca61d6c367ff8bfd0cd1bb5a15b0537b63b0860f"
+    },
+    {
+      "path": ".agents/skills/dev-cycle-planning-implementation/SKILL.md",
+      "sha256": "a7bcdd354584faf3e8d48ef9326df184bbe1c2d1c2670637aaee9d23940989e9"
+    },
+    {
+      "path": ".agents/skills/dev-cycle-synthesizing-research/SKILL.md",
+      "sha256": "ab8ee847822f6c9292769e05246a2d2117fd79677b10f15faf2041c3acffc0de"
+    },
+    {
+      "path": ".agents/skills/dev-cycle-writing-dev-specs/SKILL.md",
+      "sha256": "99165226f60a99bd3a5f5220530c17092d97d0305c0d90bfcc1279628994a57e"
+    },
+    {
+      "path": ".agents/skills/frontend-typescript-building-react-frontends/SKILL.md",
+      "sha256": "5b4e45f48aeb9e4543a77d56bf08ed6ea4ed82c3b11f549d46b472bd3d637f60"
+    },
+    {
+      "path": ".agents/skills/general-delivering-changes-with-git/SKILL.md",
+      "sha256": "bdf3365d5ba9b31b9089ed7e8c8cc9c2eb9f225f273fd01deee4b7249af3d493"
+    },
+    {
+      "path": ".agents/skills/general-designing-apis/SKILL.md",
+      "sha256": "fcd2c814d16f82ded24461f7d9f487c223ea4e08844bd65634a514be94c1b7d3"
+    },
+    {
+      "path": ".agents/skills/general-diagramming-architecture/SKILL.md",
+      "sha256": "32f18737e6eb0fef224f0e1a11c972a07dab86034274f3059a3a57122ba0e936"
+    },
+    {
+      "path": ".agents/skills/general-frontend-audit/SKILL.md",
+      "sha256": "3daab707cfb0d58577b8a1d5c398a414363fc447484a1f4cd6b32678441e8e20"
+    },
+    {
+      "path": ".agents/skills/general-frontend-design/SKILL.md",
+      "sha256": "69ea66342b13fc9d3cd5d1cf836d4a4a935a049f73064391ba11840edb98b7b0"
+    },
+    {
+      "path": ".agents/skills/general-frontend-hardening/SKILL.md",
+      "sha256": "04ac2402b8d09438460f5a58776c0080d0186c9d5a2c4c7aec2afac4127ff598"
+    },
+    {
+      "path": ".agents/skills/general-frontend-responsive-design/SKILL.md",
+      "sha256": "a681efc74cc5d50cf08fdf5523a0ec62be5701b1f47fb1393b526b80e089a321"
+    },
+    {
+      "path": ".agents/skills/general-frontend-ux-copy/SKILL.md",
+      "sha256": "748f5b07c38e43108e9298957771cf688e961c874566ee0c4c189a0a20f639f1"
+    },
+    {
+      "path": ".agents/skills/general-frontend-verify/SKILL.md",
+      "sha256": "4344f84ffecc73a04737d0dfe829bc44202af5b3f61d23f15f1a64e97cc1d683"
+    },
+    {
+      "path": ".agents/skills/general-handling-errors/SKILL.md",
+      "sha256": "9f2b528ac5141d513f72f122a1729797f2df3d13259e491cd4a82a284371c87c"
+    },
+    {
+      "path": ".agents/skills/general-instrumenting-product-analytics/SKILL.md",
+      "sha256": "1b3cd61214bde519786791102172706032eefb5f8cca453efe055fb26a7b526e"
+    },
+    {
+      "path": ".agents/skills/general-managing-configuration/SKILL.md",
+      "sha256": "29704cbb2fac5b836e76203fc9bb1495930298d3568a0d9e631f33accccfdd50"
+    },
+    {
+      "path": ".agents/skills/general-managing-design-tokens/SKILL.md",
+      "sha256": "efa7180a595e2f6ce5bdf5f7171ccba51dfe9e1f31bea754842626ce43c29772"
+    },
+    {
+      "path": ".agents/skills/general-migrating-data-schemas/SKILL.md",
+      "sha256": "3ed5dabae880ff7c35297109575143ca975db3faa9f9041b3fe15e521dc8187a"
+    },
+    {
+      "path": ".agents/skills/general-operating-safely/SKILL.md",
+      "sha256": "80fcf40a313668e9d50f5de03dfef6cf22b53b834cb42585ab662132dc9dcb2e"
+    },
+    {
+      "path": ".agents/skills/general-performance-optimization/SKILL.md",
+      "sha256": "4104dd0bed0c9abf3169c9eaad248c88596edc48ce3b985573e2f832e87f6260"
+    },
+    {
+      "path": ".agents/skills/general-reviewing-design-with-aposd/SKILL.md",
+      "sha256": "960f76b2643b236dd81267c1884bcf343facfd1499daa2d6f50d94fb59989cf0"
+    },
+    {
+      "path": ".agents/skills/general-setting-up-observability/SKILL.md",
+      "sha256": "f859c574d09d3feb7c9de9069549dc07f623af0c373cac20dbc54bac0d6b0fb7"
+    },
+    {
+      "path": ".agents/skills/general-testing-strategies/SKILL.md",
+      "sha256": "d30a9740fa3bb195d824319b7faeb1a06fd7e79ca748a4b79bfc56504c8e3200"
+    },
+    {
+      "path": ".agents/skills/general-writing-commit-messages/SKILL.md",
+      "sha256": "bc3e3380797c09b3e559bd0611f8c9f50c055c86c59e3b232794692d74cb4251"
+    },
+    {
+      "path": ".agents/skills/gtm-generating-launch-artifacts/SKILL.md",
+      "sha256": "f64741d24c30689c1f9f4cc354aab20c8ed88d23748497207a4576259faaac45"
+    },
+    {
+      "path": ".agents/skills/gtm-writing-release-communications/SKILL.md",
+      "sha256": "730fbefaeb25346952a4dea5ce94fa8fbc5e549e304f9d59bbcdac88ca1d294b"
+    },
+    {
+      "path": ".agents/skills/gtm-writing-sales-collateral/SKILL.md",
+      "sha256": "451cfb1541f5a9d0d0ba14f272256779066f63c1b3632ece8902e5007d1c0823"
+    },
+    {
+      "path": ".agents/skills/gtm-writing-user-documentation/SKILL.md",
+      "sha256": "9d4b81da56f12bb93e1943d7e7f604e9d65d7a5c6062ab16b885bd7acc93eec3"
+    },
+    {
+      "path": ".agents/skills/leet-development-foreman/SKILL.md",
+      "sha256": "abb27ecae26e8759f4671ff5aa712b81e727136dfeb524c68ab1a57fdfe8b967"
+    },
+    {
+      "path": ".agents/skills/ops-defining-alerts-and-slos/SKILL.md",
+      "sha256": "5571e3d7c6931aaf5ac341106785250777bc38f70e377f65d2235957e25a7c39"
+    },
+    {
+      "path": ".agents/skills/ops-responding-to-incidents/SKILL.md",
+      "sha256": "d129384d5643243152c5c2ec9829bed61f94c08234947b6cc0d29d83e89dabbc"
+    },
+    {
+      "path": ".agents/skills/pr/SKILL.md",
+      "sha256": "e7d881b919c78dce869eff77f70c980f46b5e73a9039abad1cfebf94514f344d"
+    },
+    {
+      "path": ".agents/skills/security-designing-authentication/SKILL.md",
+      "sha256": "57eb480b49c0e03437cea1e6d37e27b459c9359bb1f87784ab93218631e3e731"
+    },
+    {
+      "path": ".agents/skills/security-designing-authorization/SKILL.md",
+      "sha256": "5cc6fb0a9547488990a7fec7e4b0dc2aa93b20ec0cb1e72450c39e86b232eb2d"
+    },
+    {
+      "path": ".agents/skills/system-deploying-environments/SKILL.md",
+      "sha256": "cc98bf925c538b4c4c3f0d139a151ce1d9a63c730c16e132597bff61f8c4bb22"
+    },
+    {
+      "path": ".agents/skills/system-developing-with-docker/SKILL.md",
+      "sha256": "4dce59c5d8a2868f13746ed046c66664fb395ddb9620d2c98bcb065015399d74"
+    },
+    {
+      "path": ".agents/skills/system-integrating-git-hosting/SKILL.md",
+      "sha256": "7f53539d4cb4c30895ba98397d1a5e0e785bb3fb48da286df6c557127e9d8184"
+    },
+    {
+      "path": ".agents/skills/system-managing-domains-and-tls/SKILL.md",
+      "sha256": "18b162c9620b2e65b6b8b53a0e74813c6b6b5cb436305e8e715819afeb2251d1"
+    },
+    {
+      "path": ".agents/skills/testing-typescript-applications/SKILL.md",
+      "sha256": "8e8c9e50fe90f58beada11b82d1c8ce9340f69e12da74a98b86f9034e7a17376"
+    },
+    {
+      "path": ".agents/skills/testing-with-playwright/SKILL.md",
+      "sha256": "da2042e17c858d9a7ce5520842f289609483ec5693165a9aa965a8d84208ba82"
+    },
+    {
+      "path": ".agents/skills/typescript-implementing-logging/SKILL.md",
+      "sha256": "77fa53dfb5482f8c1a7e4a1a7b2c2def13f0df7dcbd5376e271964dfdcc968ae"
+    },
+    {
+      "path": ".agents/toolchain-lock.json",
+      "sha256": "6a0e4e3041142dbc808fafcf7c14a00663a4024deaf6b2539b29368668c8c7e0"
+    },
+    {
+      "path": ".agents/toolchain.json",
+      "sha256": "d02ad3b3cf0bd370ce1f2b1c0d8108df9563ed688e96aa8826da6bbe7525b870"
+    },
+    {
+      "path": ".agents/tools/check-checklist.ts",
+      "sha256": "a0a34b8d95754b427a89d9607d298e53ef267f47a5e49344e7a1eec965bd64b3"
+    },
+    {
+      "path": ".agents/tools/check-scaffold.ts",
+      "sha256": "dc0f6959e752498d5289d227a484680aab3c03a5532d0f367e26e9ad84c5a890"
+    },
+    {
+      "path": "docs/lifecycle/app-building.md",
+      "sha256": "069031e7ad8aff4a28fda97a80c82ab903a2001385f991f9494618b22ff983c5"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-00-scaffold.md",
+      "sha256": "cc5664e8c75e00ff8bcd242e005ae9faba2afb6cba9a1289cd6d0bf74d24e69a"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-02-define-product.md",
+      "sha256": "7edd1fca293c274d598db701e95f9350132ebfd7da7db6e13e0f5aebdf2b624a"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-03-roadmap.md",
+      "sha256": "35f169b65a9153cefc3b37f005a4c5606ebc16a8304a471ca99fb9870bd43671"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-04-engineering-contract.md",
+      "sha256": "2357d9945195322cad1298408383de32907031f30ca2f7b5e4f1b69539bdae49"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-05-implementation-plan.md",
+      "sha256": "d30efa99118ba82cf36cb9391004819861b843f74188650913aabf5da7d8486b"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-06-build.md",
+      "sha256": "fa06dc1497b5313cfb33fced6553057fb93f642f07348418d22ebab6c1509743"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-07-prove-it-works.md",
+      "sha256": "02b10f0d195357cbd1083e456f4093da3818c78b420a0c511305d74a3f44d637"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-08-review.md",
+      "sha256": "4d894b359f8ad6cb8f0a9ec1530e0120a2e84dfa1dd4074879014bec59139a1c"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-09-pull-request.md",
+      "sha256": "3dfc8478651fbe60d60336ac7244e939db4cb6bcdf05082dbbd8b5cd7be741f7"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-10-release.md",
+      "sha256": "03b9dcc57fa3294bb9d7accf998b01e36cadbda3a0279b277d8dd0a14efaecf7"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-11-deploy.md",
+      "sha256": "d95cd6c5925801d526e30e275cb5ae7924414a4d3a1f1c077746b7d9f07ee390"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-12-tell-people.md",
+      "sha256": "eacdb17d7888551a211eb0be5f8ebcb09926d1b8b3ac240ea1e088e21ee8f035"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-13-operate.md",
+      "sha256": "1b01cc1d747ad12f19119c10477771cf260a37cf11bd5c1ab7af34e58a776fb6"
+    },
+    {
+      "path": "docs/lifecycle/checklist/step-14-close-loop.md",
+      "sha256": "03c9946cd57ca920ffff88e52235857e632425f6459bd3269beb63a671bc8c4d"
+    },
+    {
+      "path": "docs/lifecycle/plan.md",
+      "sha256": "1cac863bbc39a2f3229f9df543c6fdc137620e28e33baa618d7c246a4e42c69f"
+    },
+    {
+      "path": "docs/prd/hello-task.md",
+      "sha256": "1f4e50d2217bdc3196fafaaee8a3f0610a194fe42b85c279e5a119552b9fab14"
+    }
+  ]
+}

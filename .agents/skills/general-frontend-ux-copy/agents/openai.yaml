@@ -1,0 +1,4 @@
+interface:
+  display_name: "UX Copy"
+  short_description: "Improve labels, errors, and empty states"
+  default_prompt: "Use $general-frontend-ux-copy to improve labels, errors, confirmations, and empty-state text."

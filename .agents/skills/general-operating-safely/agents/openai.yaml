@@ -1,0 +1,4 @@
+interface:
+  display_name: "Change Safety"
+  short_description: "Avoid destructive changes and prod risk"
+  default_prompt: "Use $general-operating-safely to check this operation for destructive-command or production-safety risk."

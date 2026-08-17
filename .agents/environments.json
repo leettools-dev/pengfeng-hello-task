@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "_comment": [
+    "Venture recorded the operator-selected production environment set after intake preflight succeeded.",
+    "Staging is explicitly disabled; the lifecycle uses a production-shaped local rehearsal instead.",
+    "Each production preflight is read-only and can be reproduced by Foreman with its admitted bindings."
+  ],
+  "environments": [
+    {
+      "name": "local",
+      "declared": true,
+      "deploy_target": "docker-compose",
+      "domain": null,
+      "preflight": null,
+      "required_env": []
+    },
+    {
+      "name": "staging",
+      "declared": false,
+      "deploy_target": null,
+      "domain": null,
+      "preflight": null,
+      "required_env": []
+    },
+    {
+      "name": "production",
+      "declared": true,
+      "deploy_target": "leet-deploy",
+      "domain": "hello-task.pengfeng.leettools.ai",
+      "preflight": "leet-deploy edge preflight --domain hello-task.pengfeng.leettools.ai --json",
+      "required_env": [
+        "DOCKER_HOST",
+        "GOOGLE_CLOUD_PROJECT",
+        "GOOGLE_APPLICATION_CREDENTIALS_JSON",
+        "GODADDY_API_KEY",
+        "GODADDY_API_SECRET",
+        "LEET_DEPLOY_EDGE_TLS_EMAIL",
+        "LEET_DEPLOY_EDGE_ZONE",
+        "LEET_DEPLOY_EDGE_SSH_PRIVATE_KEY",
+        "LEET_DEPLOY_EDGE_SSH_PUBLIC_KEY"
+      ]
+    }
+  ]
+}

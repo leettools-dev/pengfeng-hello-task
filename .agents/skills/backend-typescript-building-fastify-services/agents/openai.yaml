@@ -1,0 +1,4 @@
+interface:
+  display_name: "TypeScript Fastify Services"
+  short_description: "Build TypeScript backend services with Fastify"
+  default_prompt: "Use $backend-typescript-building-fastify-services to implement a TypeScript Fastify backend following the recommended stack conventions."

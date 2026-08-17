@@ -1,0 +1,32 @@
+{
+  "name": "product-venture",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "npm@11.6.2",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/app/src/server.ts",
+    "test": "vitest run",
+    "check:scaffold": "node .agents/tools/check-scaffold.ts .",
+    "check:checklist": "node .agents/tools/check-checklist.ts .",
+    "check:capabilities": "node .agents/tools/capability-preflight.ts .",
+    "skills:install": "npx @pengfeng/leet-dev-guides skill-instantiate --product .",
+    "lifecycle:instantiate": "npx @pengfeng/leet-dev-guides lifecycle-instantiate --product .",
+    "toolchain:lock": "npx @pengfeng/leet-dev-guides toolchain-lock write --product .",
+    "toolchain:verify": "npx @pengfeng/leet-dev-guides toolchain-lock verify --product ."
+  },
+  "dependencies": {
+    "@fastify/type-provider-typebox": "^5.2.0",
+    "@sinclair/typebox": "^0.34.0",
+    "fastify": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Authorization Design"
+  short_description: "Design and test authorization policies"
+  default_prompt: "Use $security-designing-authorization to define the permissions, scopes, enforcement points, and tests for this application."

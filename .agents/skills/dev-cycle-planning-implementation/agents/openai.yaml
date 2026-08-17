@@ -1,0 +1,4 @@
+interface:
+  display_name: "Implementation Planning"
+  short_description: "Break work into verifiable tasks"
+  default_prompt: "Use $dev-cycle-planning-implementation to break this change into small tasks with exact files and verification steps."

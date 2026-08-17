@@ -1,0 +1,4 @@
+interface:
+  display_name: "APOSD Design Review"
+  short_description: "Review designs using APOSD red flags"
+  default_prompt: "Use $general-reviewing-design-with-aposd to review this API or module design for APOSD issues."

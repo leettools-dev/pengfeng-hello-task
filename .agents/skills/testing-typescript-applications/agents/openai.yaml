@@ -1,0 +1,4 @@
+interface:
+  display_name: "TypeScript Testing"
+  short_description: "Design and implement TypeScript test suites"
+  default_prompt: "Use $testing-typescript-applications to design or implement the appropriate TypeScript tests for this change."

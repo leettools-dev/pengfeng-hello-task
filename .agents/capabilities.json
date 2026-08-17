@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-17T05:34:45.535Z",
+  "product_root": "/workspace",
+  "probes": [
+    {
+      "id": "git-hosting",
+      "title": "Git hosting (pull requests, CI status, review records)",
+      "verdict": "available",
+      "evidence": "origin https://github.com/leettools-dev/pengfeng-hello-task\n$ gh repo view github.com/leettools-dev/pengfeng-hello-task --json nameWithOwner -> exit 0: {\"nameWithOwner\":\"leettools-dev/pengfeng-hello-task\"}",
+      "unblocks": [
+        "pr.description",
+        "pr.ci-green",
+        "pr.independent-approval"
+      ]
+    },
+    {
+      "id": "environment-set",
+      "title": "Declared environment set (which environments this venture has)",
+      "verdict": "unavailable",
+      "evidence": ".agents/environments.json declares local, production environment(s) and no staging environment — this venture is production-only by decision, so the staging rehearsal is replaced by the production-shaped local rehearsal",
+      "unblocks": [
+        "deploy.staging-first"
+      ]
+    },
+    {
+      "id": "deploy-target",
+      "title": "Deploy target (remote environments the product is published to)",
+      "verdict": "available",
+      "evidence": "Venture intake completed the configured read-only deployment preflight before repository provisioning.\n[production] deploy_target=leet-deploy domain=hello-task.pengfeng.leettools.ai; controller admission passed",
+      "unblocks": [
+        "deploy.health-check",
+        "deploy.smoke-critical-flows",
+        "deploy.error-observation",
+        "deploy.rollback-confirmed",
+        "deploy.secrets-present",
+        "deploy.long-lived-dependencies"
+      ]
+    },
+    {
+      "id": "budget-meter",
+      "title": "Usage meter enforcing the declared spend ceilings",
+      "verdict": "unavailable",
+      "evidence": "no meter declared: .agents/budgets.json has no \"meter\".command and LEET_USAGE_METER_CMD is unset. The supervisor's meter, if any, is not readable from inside this workspace, so no invocation here can produce a meter reading.",
+      "unblocks": [
+        "scaffold.baseline.budget.metered"
+      ]
+    },
+    {
+      "id": "telemetry-sink",
+      "title": "Telemetry sink (queryable destination for logs, metrics, traces)",
+      "verdict": "unavailable",
+      "evidence": "no OTEL_EXPORTER_OTLP_ENDPOINT, no GCP credentials for a provider-native sink, and no telemetry service in deploy/local/docker-compose.yml. Logs would be visible only on the host that runs the container.",
+      "unblocks": [
+        "ops.telemetry-flowing"
+      ]
+    },
+    {
+      "id": "analytics-sink",
+      "title": "Product-analytics sink (adoption/activation events)",
+      "verdict": "unavailable",
+      "evidence": "no analytics write key in the environment (checked ANALYTICS_WRITE_KEY, POSTHOG_API_KEY, POSTHOG_PROJECT_API_KEY, SEGMENT_WRITE_KEY, AMPLITUDE_API_KEY) — nothing to send adoption events to",
+      "unblocks": [
+        "ops.analytics-events"
+      ]
+    }
+  ]
+}

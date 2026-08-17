@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cut Release"
+  short_description: "Validate, tag, publish, and verify releases"
+  default_prompt: "Use $cut-release to cut and verify the next release for this repository."

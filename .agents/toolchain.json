@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "utility_repos": [
+    {
+      "name": "leet-deploy",
+      "path": "../leet-deploy",
+      "command": "npx @leettools/leet-deploy",
+      "skills_path": "skills",
+      "skill_fragments": ".agents/skill-fragments",
+      "purpose": "Deployment preflight, plan, apply, rollback"
+    },
+    {
+      "name": "leet-ssl-cert",
+      "path": "../leet-ssl-cert",
+      "command": "npx @leettools/leet-ssl-cert",
+      "skills_path": "skills",
+      "skill_fragments": ".agents/skill-fragments",
+      "purpose": "Certificate and DNS automation"
+    }
+  ],
+  "local_tools": [
+    {
+      "name": "check-scaffold",
+      "path": ".agents/tools/check-scaffold.ts",
+      "command": "npm run check:scaffold"
+    }
+  ]
+}

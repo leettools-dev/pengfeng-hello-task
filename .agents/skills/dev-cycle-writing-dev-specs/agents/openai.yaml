@@ -1,0 +1,4 @@
+interface:
+  display_name: "Write Dev Specs"
+  short_description: "Turn a PRD into an engineering dev spec"
+  default_prompt: "Use $dev-cycle-writing-dev-specs to review the given PRD, request any needed clarifications, and produce the dev spec using the preferred stack and checklists."

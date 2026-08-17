@@ -1,0 +1,4 @@
+interface:
+  display_name: "Frontend Design"
+  short_description: "Design polished application UI"
+  default_prompt: "Use $general-frontend-design to design or refine this application UI."

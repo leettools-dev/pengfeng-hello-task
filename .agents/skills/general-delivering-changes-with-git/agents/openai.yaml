@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Delivery"
+  short_description: "Prepare clean branches and CI-ready commits"
+  default_prompt: "Use $general-delivering-changes-with-git to preserve recovered work and leave this branch committed and CI-ready."

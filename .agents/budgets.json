@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "_comment": [
+    "Declared spend ceilings for agent work on this venture, per the cost plane.",
+    "Amounts are integer minor units (USD cents) so no budget is a float.",
+    "Crossing 'warn' reports and continues; crossing 'stop' halts the run and",
+    "waits for a human. A run with no enforced ceiling is the one failure mode",
+    "an autonomous lifecycle cannot recover from on its own.",
+    "'meter' names the read-only command that reports accumulated usage for",
+    "this venture, so the capability preflight can prove the ceilings are",
+    "measured rather than merely written down. Null means no meter is readable",
+    "from this workspace; the preflight records that, and the metering",
+    "checklist item resolves against the record instead of waiting for a",
+    "reading no invocation can produce."
+  ],
+  "currency": "USD",
+  "meter": null,
+  "venture": {
+    "warn_minor_units": 200000,
+    "stop_minor_units": 500000
+  },
+  "per_step": {
+    "default": {
+      "warn_minor_units": 100000,
+      "stop_minor_units": 300000
+    }
+  }
+}
