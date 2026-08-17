@@ -33,7 +33,11 @@ with a compliance degree; clarifications resolved, not guessed.
   plus a health endpoint for deploy checks. No other public routes." PRD
   §Acceptance Criteria 3: "`GET /` returns HTTP 200 and HTML containing the
   text 'Hello, Venture!'."
-- Status: PENDING
+- Status: MET — `docs/dev-spec.md` §6 API Contract table declares `GET /`:
+  no request body, `200` response, `text/html`, body containing "Hello,
+  Venture!"; §3.3.1 records why it is not TypeBox-schema-validated like
+  `/health` (HTML body, not JSON) and names the test
+  (`tests/unit/root.test.ts`) that enforces the contract instead.
 
 ## spec.api-contract.get-health — `GET /health` has a typed contract  [must]
 
@@ -50,7 +54,10 @@ with a compliance degree; clarifications resolved, not guessed.
   `{ \"status\": \"ok\" }`." Already implemented in
   `src/app/src/server.ts` with a TypeBox response schema — the dev spec still
   needs to document it as the binding contract.
-- Status: PENDING
+- Status: MET — `docs/dev-spec.md` §6 API Contract table declares `GET
+  /health`: no request body, `200` response, `application/json`,
+  `{ "status": "ok" }`, TypeBox schema `Type.Object({ status:
+  Type.Literal("ok") })` matching `src/app/src/server.ts`.
 
 ## spec.auth-baseline — Authentication approach is specified  [must]
 
@@ -105,7 +112,13 @@ with a compliance degree; clarifications resolved, not guessed.
   non-secret runtime config. PRD §Technical Notes: "No database, no external
   API, no runtime secrets" — config exists (PORT/HOST/LOG_LEVEL), secrets do
   not.
-- Status: PENDING
+- Status: MET — `docs/dev-spec.md` §3.3.5 lists `PORT`, `HOST`, `LOG_LEVEL`
+  by name, states they are non-secret with safe defaults, and that
+  `.env.example` declares them; §3.5 (5.3) states no secrets exist in this
+  product and that `.env` is gitignored while `.env.example` stays
+  non-secret. `server.ts` is updated in this change (step 06) to read
+  `LOG_LEVEL` so the declared config is actually consumed, closing the gap
+  the previous scaffold left (declared in `.env.example` but unread).
 
 ## spec.error-contract — Failure behavior is specified  [should]
 
@@ -119,7 +132,11 @@ with a compliance degree; clarifications resolved, not guessed.
 - Applicability: PRD §Requirements names two routes (`/`, `/health`) and
   states "No other public routes" — the spec should state what an unmatched
   path returns (404).
-- Status: PENDING
+- Status: MET — `docs/dev-spec.md` §6 API Contract table's third row states
+  the unmatched-path behavior: `404` with Fastify's default error shape
+  (`{"message":"Route <METHOD>:<path> not found","error":"Not Found",
+  "statusCode":404}`), observed directly from the running dev server this
+  invocation (`curl -i http://127.0.0.1:3000/` before the `/` route existed).
 
 ## spec.clarifications-resolved — No open questions left as guesses  [must]
 
@@ -130,7 +147,14 @@ with a compliance degree; clarifications resolved, not guessed.
 - Counterexample: The spec assumes one-vote-per-IP when the PRD never decided the
   dedup rule.
 - Applies when: Always.
-- Status: PENDING
+- Status: MET — The PRD is small enough that no clarification round was
+  needed (it already states problem, users, flow, acceptance criteria,
+  non-goals, and technical notes in full). The one open design question —
+  how to keep the stack-default layering (routes/services/repositories,
+  Postgres, auth) from being silently assumed against a PRD that explicitly
+  excludes all three — is resolved inline as the Architecture Decision "No
+  frontend framework, no Postgres, no auth" in `docs/dev-spec.md` §2, not
+  left as a TBD.
 
 ## spec.items-labeled — Every spec item is labeled and graded  [must]
 
@@ -139,4 +163,6 @@ with a compliance degree; clarifications resolved, not guessed.
 - Evidence required: The dev spec's items each carry a label and a degree.
 - Counterexample: A binding requirement is indistinguishable from a suggestion.
 - Applies when: Always.
-- Status: PENDING
+- Status: MET — Every numbered item in `docs/dev-spec.md` §3 (Backend Spec)
+  carries an explicit `[Specification, <degree>]` or `[Guidance, <degree>]`
+  or `[N/A]` label inline (e.g. "3.1.1 [Specification, must-have] ...").
