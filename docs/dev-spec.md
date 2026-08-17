@@ -130,10 +130,19 @@ to store. (Deleted per template instruction; see Change Log.)
 
 ### 3.6 DevOps Policies
 
-- 6.1 [Specification, must-have] Long-running Node process in a container
-  (`deploy/local/docker-compose.yml` for local rehearsal;
-  `hello-task.pengfeng.leettools.ai` via `leet-deploy` for production — see
-  `design/architecture.md` Deployment Topology).
+- 6.1 [Specification, must-have] Long-running Node process in a container.
+  `Dockerfile` (repo root, multi-stage, `node:24-slim`) is the production
+  artifact: `npm ci --omit=dev` in a `deps` stage, then only `node_modules`,
+  `package.json`, and `src/app/src` are copied into the runtime stage — no
+  devDependencies, no test files, no docs ship in the image. `tsx` runs the
+  TypeScript source directly at runtime (no separate build step, matching
+  3.1.3); it is a regular dependency, not a devDependency, because the
+  running container needs it. `.dockerignore` keeps the build context small.
+  `deploy/local/docker-compose.yml` remains the separate hot-reload dev tool
+  (bind-mounts source, runs `npm install && npm run dev`) — a different
+  purpose from the production image. `hello-task.pengfeng.leettools.ai` via
+  `leet-deploy` is production — see `design/architecture.md` Deployment
+  Topology.
 - 6.2 [Specification, must-have] `local` and `production` environments only
   (`.agents/environments.json`); no `staging` — declared production-only by
   venture decision (see step 11 checklist `deploy.prerelease-rehearsal`).
