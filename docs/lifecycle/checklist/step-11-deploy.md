@@ -65,7 +65,17 @@ having just re-run the preflight itself.
   persistent data per PRD §Data and roles), so the rehearsal reduces to:
   bring up the local docker-compose stack from the release candidate, run the
   smoke suite against it, before the production apply.
-- Status: PENDING
+- Status: MET — Rehearsed against the exact production mechanism, not the
+  dev-only `docker-compose.yml`: built the real production artifact
+  (`docker build -t hello-task:local -f /workspace/Dockerfile /workspace`,
+  same `node:24-slim` multi-stage image `leet-deploy edge apply` builds from
+  this Dockerfile), ran it (`docker run -d -p 3000:3000 hello-task:local`,
+  same `HOST=0.0.0.0`/`PORT=3000` configuration mechanism as production),
+  and smoke-tested it: `GET /health` → `200 {"status":"ok"}`, `GET /` → `200`
+  `text/html` containing "Hello, Venture!", over the published container
+  port — 2026-08-17, before the production `leet-deploy edge apply` run.
+  Container stopped and removed after capture. No migrations exist (no
+  persistent data, per PRD §Data and roles) and no seed data was needed.
 
 ## deploy.health-check — Post-deploy health check passes  [must]
 
@@ -112,9 +122,13 @@ having just re-run the preflight itself.
 - Counterexample: A bad deploy has no way back except a manual rebuild.
 - Applies when: The step runs.
 - Status: PENDING
-- Note: `deploy/production/README.md` is currently a placeholder ("Place
-  production IaC, release notes for operators, rollback steps ... here.") —
-  the rollback procedure still needs to be written there.
+- Status: MET — `deploy/production/README.md` now documents the rollback
+  procedure: check out the previous good commit and re-run the same
+  `leet-deploy edge apply` command (rebuilds the image from that commit's
+  `Dockerfile` and redeploys to the same VM), or `leet-deploy edge reconcile`
+  if only the edge stack needs reapplying. This is a real, available path —
+  the deploy target is one VM with no separate image registry, so
+  "redeploy the previous commit" is the rollback, not aspirational IaC.
 
 ## deploy.secrets-present — Required secrets present in the target environment  [must]
 
@@ -144,7 +158,15 @@ having just re-run the preflight itself.
   `LEET_DEPLOY_EDGE_SSH_PRIVATE_KEY`, `LEET_DEPLOY_EDGE_SSH_PUBLIC_KEY` per
   `.agents/environments.json` `production.required_env`. Capability record
   `deploy-target` = `available`.
-- Status: PENDING
+- Status: MET — `leet-deploy edge preflight --domain
+  hello-task.pengfeng.leettools.ai`, run in this invocation, reports every
+  required credential present and usable: `ok gcp.credentials.file`,
+  `ok gcp.project`, `ok godaddy.credentials`, `ok tls.email: leettools@gmail.com`,
+  `ok local.ssh_public_key`, `ok local.ssh_private_key`, `ok local.docker`
+  (daemon reachable), `ok gcp.edge_permissions`, `ok godaddy.api`
+  (credentials validated), `ok godaddy.zone` ("leettools.ai" accessible).
+  No credential was generated locally — all read from the environment as
+  injected values, per the assigned skill's SSH-key handling rules.
 
 ## deploy.long-lived-dependencies.tls-certificate — TLS certificate for the production domain renews unattended  [must]
 
