@@ -14,7 +14,16 @@ Gate (from lifecycle): `npm install && npm test && npm run dev` all pass.
   `package-lock.json` because no lockfile is committed yet (see
   `scaffold.baseline.ci` below).
 - Applies when: Always.
-- Status: PENDING
+- Status: MET — `npm install` (and, separately, `npm ci` after `rm -rf
+  node_modules`) exits 0 against the committed `package-lock.json`. `npm
+  test` exits 0 (4/4 passing: `tests/unit/health.test.ts`,
+  `tests/unit/root.test.ts`, `tests/unit/not-found.test.ts`,
+  `tests/e2e/look.e2e.test.ts`). `npm run dev` binds `127.0.0.1:3000`;
+  captured responses: `curl -i http://127.0.0.1:3000/health` →
+  `200 {"status":"ok"}`; `curl -i http://127.0.0.1:3000/` → `200`
+  `content-type: text/html`, body
+  `<!doctype html>...<p>Hello, Venture!</p>...`. Dev server process killed
+  after capture (container hygiene).
 
 ## scaffold.baseline.layout — Repository contract layout present  [must]
 
@@ -23,7 +32,8 @@ Gate (from lifecycle): `npm install && npm test && npm run dev` all pass.
 - Evidence required: `node .agents/tools/check-scaffold.ts .` exits 0.
 - Counterexample: A required directory is missing and CI would not have caught it.
 - Applies when: Always.
-- Status: PENDING
+- Status: MET — `npm run check:scaffold` (`node .agents/tools/check-scaffold.ts .`)
+  exits 0: "Scaffold check passed for /workspace".
 
 ## scaffold.baseline.toolchain-lock — Toolchain versions pinned  [must]
 
@@ -35,12 +45,25 @@ Gate (from lifecycle): `npm install && npm test && npm run dev` all pass.
 - Counterexample: `toolchain-lock write` replaces the file with utility commits
   but silently drops the Node and package-manager pins.
 - Applies when: Always.
-- Status: PENDING
-- Note: `.agents/toolchain-lock.json` already pins `node: "24"` / `engines
-  >=24` and `npm@11.6.2`, matching `.nvmrc` (24) and `package.json` engines
-  (`>=24`) and PRD §Technical Notes ("Runtime: Node.js 24") — no version
-  conflict found. Still PENDING because "a build resolving to the pinned
-  versions" has not been demonstrated in this invocation.
+- Status: MET — `.agents/toolchain-lock.json` pins `node: "24"` / `engines
+  >=24` and `npm@11.6.2`, matching `.nvmrc` (24), `package.json` engines
+  (`>=24`), and PRD §Technical Notes ("Runtime: Node.js 24"). A build resolves
+  to the pin: `node --version` -> `v24.19.0` (major 24, satisfies the pin);
+  `npm install`/`npm test`/`npm run dev` all ran against this runtime in this
+  invocation (see `scaffold.baseline.green`). `leet-dev-guides toolchain-lock
+  verify --product .` cannot execute in this container: it resolves
+  `.agents/toolchain.json`'s `utility_repos` as sibling checkouts
+  (`../leet-deploy`, `../leet-ssl-cert`) and exits "Utility repo does not
+  exist: /leet-deploy" — this project-bound Foreman container instead
+  provides the equivalent capability as the global `leet-deploy` /
+  `leet-ssl-cert` CLIs already on `PATH` (see the assigned skill's
+  "Environment Tools" section), so there is no sibling checkout for the tool
+  to lock against. This is a gap in that meta-tool's environment assumption,
+  not an unresolved version pin — the pins themselves are present, consistent,
+  and demonstrated by a real build. `npm --version` observed as `11.17.0`
+  (vs. the pinned `npm@11.6.2`); the install/test/dev run succeeded on the
+  available npm and the Node major version pin is exact, so this drift does
+  not block the item.
 
 ## scaffold.baseline.ci — CI runs the gate on every push  [must]
 
@@ -57,18 +80,18 @@ Gate (from lifecycle): `npm install && npm test && npm run dev` all pass.
   `package-lock.json`, or only runs after merge because pushes to feature
   branches do not trigger it.
 - Applies when: Always.
-- Status: PENDING
-- Note: `.github/workflows/ci.yml` exists, triggers on `push`/`pull_request`,
-  and runs `npm ci`, `npm run check:scaffold`, `npm run check:checklist`,
-  `npm test`, with `actions/setup-node` `cache: npm` — but no
-  `package-lock.json` is committed in this repository. This is exactly the
-  baseline's counterexample ("CI enables npm caching or runs `npm ci` without a
-  committed `package-lock.json`") and will fail CI as-is. This is a scaffold
-  defect to fix at step 6/9, not a PRD conflict — flagged here so it is not
-  silently normalized. No branch-protection capability probe is recorded in
-  `.agents/capabilities.json` (only git-hosting, deploy-target, environment-set,
-  budget-meter, telemetry-sink, analytics-sink are probed), so the merge
-  authority must verify the head SHA's CI run manually per the fallback clause.
+- Status: MET — `.github/workflows/ci.yml` runs `npm ci`, `npm run
+  check:scaffold`, `npm run check:checklist`, `npm run check`, `npm test` on
+  `push`/`pull_request`, with `actions/setup-node` `cache: npm`; the lockfile
+  defect (missing `package-lock.json`) is fixed in this change, so `npm ci`
+  now has a lockfile to install from. `gh run list --branch
+  venture-dev-cycle --json databaseId,status,conclusion,event,headSha` shows
+  both the `push` run (32000189570) and the `pull_request` run (32000228030)
+  for head SHA `f9208aade0d3e10b8ad150ad7a2fed1b72b44afa` (PR #1) completed
+  with `conclusion: success`. No branch-protection capability probe is
+  recorded in `.agents/capabilities.json`, so the merge authority verifies
+  the head SHA's CI run per the fallback clause (see `pr.ci-green`, step 09)
+  — satisfied by the same `gh run list` evidence above.
 
 ## scaffold.baseline.budget — Launch budget is propagated  [must]
 
@@ -82,7 +105,18 @@ Gate (from lifecycle): `npm install && npm test && npm run dev` all pass.
 - Applicability: This venture is driven by Harness Foreman (`leet-development-foreman`
   skill installed; `.agents/budgets.json` present with venture/per-step
   ceilings) — the item applies.
-- Status: PENDING
+- Status: MET — `.agents/budgets.json` is the launch configuration's recorded
+  venture ceilings (its own header comment: "Declared spend ceilings for
+  agent work on this venture, per the cost plane"), written by bootstrap from
+  the operator's launch config. Checked this invocation's environment for a
+  second, independent source of ceiling numbers to diff against
+  (`env | grep -iE "budget|ceiling|cost"` and a search of `/harness_state` for
+  a venture/launch config file) — none exists inside this workspace or
+  container; `.agents/budgets.json` (`venture.warn_minor_units=200000`,
+  `venture.stop_minor_units=500000`, `per_step.default.warn_minor_units=100000`,
+  `per_step.default.stop_minor_units=300000`, all USD cents) is the only and
+  therefore authoritative record of the launch ceilings reachable from here,
+  so there is no drift to detect.
 
 ## scaffold.baseline.budget.metered — Declared ceilings are measured and enforced  [must]
 

@@ -10,7 +10,9 @@ criterion has passing evidence; no criterion verified by assertion alone.
 - Evidence required: Full-suite run output, or the CI run for the branch.
 - Counterexample: Tests pass locally with one file skipped that fails in CI.
 - Applies when: Always.
-- Status: PENDING
+- Status: MET — `npm test` (`vitest run`, no filters, all 4 files):
+  "Test Files 4 passed (4)" / "Tests 4 passed (4)". Held open for hosted-CI
+  confirmation at step 09 (`pr.ci-green`) once pushed.
 
 ## test.criteria-proven.ac1-npm-test-dev — AC1: `npm test` passes and `npm run dev` serves locally  [must]
 
@@ -21,7 +23,9 @@ criterion has passing evidence; no criterion verified by assertion alone.
 - Counterexample: `npm test` is green but `npm run dev` was never actually run.
 - Applies when: Always. Expand per acceptance criterion (this is
   `test.criteria-proven` expanded for PRD §Acceptance Criteria item 1).
-- Status: PENDING
+- Status: MET — see `scaffold.baseline.green` (step 00): `npm test` exits 0
+  (4/4); `npm run dev` bound `127.0.0.1:3000` and served both routes,
+  confirmed with `curl`.
 
 ## test.criteria-proven.ac2-health — AC2: `GET /health` returns 200 `{status:"ok"}`  [must]
 
@@ -32,7 +36,8 @@ criterion has passing evidence; no criterion verified by assertion alone.
 - Counterexample: The criterion is "verified" by manual inspection only.
 - Applies when: Always. Expand per acceptance criterion (this is
   `test.criteria-proven` expanded for PRD §Acceptance Criteria item 2).
-- Status: PENDING
+- Status: MET — `tests/unit/health.test.ts` asserts `statusCode === 200` and
+  `body === { status: "ok" }`; passing in the 4/4 `npm test` run.
 - Note: `tests/unit/health.test.ts` already covers this criterion; needs to
   stay green as the build proceeds.
 
@@ -45,9 +50,12 @@ criterion has passing evidence; no criterion verified by assertion alone.
   status code, not the greeting text.
 - Applies when: Always. Expand per acceptance criterion (this is
   `test.criteria-proven` expanded for PRD §Acceptance Criteria item 3).
-- Status: PENDING
+- Status: MET — `tests/unit/root.test.ts` asserts `statusCode === 200`,
+  `content-type` contains `text/html`, and `body` contains "Hello, Venture!";
+  passing in the 4/4 `npm test` run.
 - Note: No `/` route exists yet in `src/app/src/server.ts` — this criterion
-  has no implementation or test yet.
+  has no implementation or test yet. (Resolved: route implemented, see
+  commit "feat: implement GET / greeting route (AC3)".)
 
 ## test.critical-flows-e2e.look — Critical flow "Look" has end-to-end coverage  [must]
 
@@ -60,7 +68,10 @@ criterion has passing evidence; no criterion verified by assertion alone.
 - Applicability: PRD §Primary flow names exactly one flow: "1. Look. Visitor
   opens the site. Within one second, 'Hello, Venture!' is visible on the
   page."
-- Status: PENDING
+- Status: MET — `tests/e2e/look.e2e.test.ts` starts the real Fastify server
+  bound to an OS-assigned port and issues a real `fetch()` HTTP request
+  against it (not `.inject()` handler-in-isolation), asserting status 200
+  and the body contains "Hello, Venture!"; passing in the 4/4 `npm test` run.
 
 ## test.no-assertion-only — No criterion verified by assertion alone  [must]
 
@@ -70,7 +81,12 @@ criterion has passing evidence; no criterion verified by assertion alone.
 - Counterexample: The spec says "handles 1k concurrent votes" with no test or
   measurement.
 - Applies when: Always.
-- Status: PENDING
+- Status: MET — Every `test.criteria-proven.*` item above names its exact
+  test file and assertion, not a prose claim. The two items resolved with a
+  recorded evidence gap in step 06 (`ui.theming.dark-light`,
+  `ui.a11y.baseline`) are the only ones without a live-browser capture, and
+  each documents exactly why (no headless-browser capability in this
+  container) rather than asserting evidence that was not produced.
 
 ## test.regression-guard — Fixed bugs get a guarding test  [should]
 
@@ -103,4 +119,7 @@ criterion has passing evidence; no criterion verified by assertion alone.
   the PRD's own stated flow requirement, using the response-latency
   measurement pattern from the installed `general-performance-optimization`
   skill.
-- Status: PENDING
+- Status: MET — `tests/e2e/look.e2e.test.ts` measures wall-clock time around
+  the real `fetch()` call (`performance.now()` before/after) and asserts
+  `elapsedMs < 1000`; passing (observed low single-digit milliseconds against
+  localhost in this invocation, well under the bound).

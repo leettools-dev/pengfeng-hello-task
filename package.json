@@ -6,6 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/app/src/server.ts",
+    "start": "tsx src/app/src/server.ts",
+    "check": "tsc --noEmit",
     "test": "vitest run",
     "check:scaffold": "node .agents/tools/check-scaffold.ts .",
     "check:checklist": "node .agents/tools/check-checklist.ts .",
@@ -18,11 +20,11 @@
   "dependencies": {
     "@fastify/type-provider-typebox": "^5.2.0",
     "@sinclair/typebox": "^0.34.0",
-    "fastify": "^5.0.0"
+    "fastify": "^5.0.0",
+    "tsx": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",
-    "tsx": "^4.0.0",
     "typescript": "^5.0.0",
     "vitest": "^3.0.0"
   },
