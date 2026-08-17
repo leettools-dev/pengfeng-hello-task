@@ -16,4 +16,5 @@ jobs:
       - run: npm ci
       - run: npm run check:scaffold
       - run: npm run check:checklist
+      - run: npm run check
       - run: npm test

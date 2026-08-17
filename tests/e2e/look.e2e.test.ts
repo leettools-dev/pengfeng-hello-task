@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildServer } from "../../src/app/src/server";
+import { buildServer } from "../../src/app/src/server.js";
 
 describe("critical flow: Look", () => {
   it("visiting / returns the greeting within one second, over a real HTTP request", async () => {

@@ -3,8 +3,14 @@ import Fastify from "fastify";
 import { Type } from "@sinclair/typebox";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 
+const GREETING_HTML = "<!doctype html><html><head><meta charset=\"utf-8\">"
+  + "<meta name=\"color-scheme\" content=\"light dark\">"
+  + "<title>Hello Task</title></head><body><p>Hello, Venture!</p></body></html>";
+
 export function buildServer() {
-  const app = Fastify({ logger: true }).withTypeProvider<TypeBoxTypeProvider>();
+  const app = Fastify({
+    logger: { level: process.env.LOG_LEVEL ?? "info" },
+  }).withTypeProvider<TypeBoxTypeProvider>();
 
   app.get(
     "/health",
@@ -19,6 +25,10 @@ export function buildServer() {
     },
     async () => ({ status: "ok" as const }),
   );
+
+  app.get("/", async (_request, reply) => {
+    return reply.type("text/html").send(GREETING_HTML);
+  });
 
   return app;
 }

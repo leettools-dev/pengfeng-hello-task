@@ -59,10 +59,11 @@ in parallel under Vitest's default pool.
   "Hello, Venture!"
 
 ### Task 3: Clean up the e2e placeholder and finalize dev-spec Progress Log
-- Files: `tests/e2e/README.md` (delete — superseded by the real test file),
-  `docs/dev-spec.md` (modify — Progress Log entry)
-- Verify: `npm run check:scaffold` still exits 0 (e2e directory still exists
-  and is non-empty because of `look.e2e.test.ts`)
+- Files: `tests/e2e/README.md` (modify — replace the generic Playwright
+  placeholder with a description of the real test now in this directory;
+  `check-scaffold` requires the file to exist, so it is rewritten, not
+  deleted), `docs/dev-spec.md` (modify — Progress Log entry)
+- Verify: `npm run check:scaffold` exits 0
 
 ## Risks and Rollback
 

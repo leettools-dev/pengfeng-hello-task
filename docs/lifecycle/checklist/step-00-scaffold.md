@@ -14,11 +14,16 @@ Gate (from lifecycle): `npm install && npm test && npm run dev` all pass.
   `package-lock.json` because no lockfile is committed yet (see
   `scaffold.baseline.ci` below).
 - Applies when: Always.
-- Status: PENDING
-- Note: `package-lock.json` now committed (`npm install` regenerated it,
-  matching `package.json`); `npm test` and `GET /health` already verified
-  green. Held `PENDING` until `GET /` exists (step 06) so this item's
-  evidence is truthful, not anticipatory.
+- Status: MET — `npm install` (and, separately, `npm ci` after `rm -rf
+  node_modules`) exits 0 against the committed `package-lock.json`. `npm
+  test` exits 0 (4/4 passing: `tests/unit/health.test.ts`,
+  `tests/unit/root.test.ts`, `tests/unit/not-found.test.ts`,
+  `tests/e2e/look.e2e.test.ts`). `npm run dev` binds `127.0.0.1:3000`;
+  captured responses: `curl -i http://127.0.0.1:3000/health` →
+  `200 {"status":"ok"}`; `curl -i http://127.0.0.1:3000/` → `200`
+  `content-type: text/html`, body
+  `<!doctype html>...<p>Hello, Venture!</p>...`. Dev server process killed
+  after capture (container hygiene).
 
 ## scaffold.baseline.layout — Repository contract layout present  [must]
 

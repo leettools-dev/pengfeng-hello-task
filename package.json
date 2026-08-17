@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx src/app/src/server.ts",
+    "check": "tsc --noEmit",
     "test": "vitest run",
     "check:scaffold": "node .agents/tools/check-scaffold.ts .",
     "check:checklist": "node .agents/tools/check-checklist.ts .",

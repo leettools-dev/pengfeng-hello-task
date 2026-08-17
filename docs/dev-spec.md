@@ -214,6 +214,13 @@ suites or a developer's running `npm run dev`. CI runs the full suite
 
 ## Progress Log
 
+- 2026-08-17 — `GET /` implemented (`src/app/src/server.ts`) returning
+  server-rendered HTML containing "Hello, Venture!"; `LOG_LEVEL` wired into
+  the Fastify logger, closing the declared-but-unread config gap. Full test
+  suite green (4/4: health, root, not-found, e2e "Look" flow with the <1s
+  latency assertion). `npm run check` (tsc --noEmit) and `npm run dev` both
+  verified manually against a live local server. Next: self-review, then
+  open the PR and deploy.
 - 2026-08-17 — Dev spec and architecture written against the existing
   `GET /health` implementation; `GET /` not yet built. Next: implementation
   plan (`docs/plans/hello-task.md`), then the `GET /` route and its tests.

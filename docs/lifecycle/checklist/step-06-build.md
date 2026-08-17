@@ -11,7 +11,13 @@ Progress Log current.
   covering them.
 - Counterexample: A task is marked done but its command was never run.
 - Applies when: Always.
-- Status: PENDING
+- Status: MET — Task 1 (`docs/plans/hello-task.md`): `npm test` run with the
+  new tests in place and no implementation — 2 failed, 2 passed, both
+  failures `expected 404 to be 200` (route missing), captured as
+  essential-test-first evidence before Task 2. Task 2: `npm test` — 4/4
+  passing; `npm run dev` + `curl` against both routes — see
+  `scaffold.baseline.green`. Task 3: `npm run check:scaffold` — "Scaffold
+  check passed for /workspace".
 
 ## build.progress-log — Dev-spec Progress Log is current  [must]
 
@@ -20,7 +26,9 @@ Progress Log current.
 - Evidence required: An up-to-date Progress Log entry for this change.
 - Counterexample: The log still says "not started" for shipped code.
 - Applies when: Always.
-- Status: PENDING
+- Status: MET — `docs/dev-spec.md` Progress Log's newest (2026-08-17) entry
+  states `GET /` is implemented, the config gap closed, and the full suite
+  green.
 
 ## build.preview-deployed-early — First runnable UI is deployed early  [must]
 
@@ -56,7 +64,25 @@ Progress Log current.
   — a web UI, even though PRD §Requirements says "No frontend framework
   needed — served HTML is enough." The clause is about the presence of any UI,
   not its complexity.
-- Status: PENDING
+- Status: MET (with a recorded evidence gap) — `src/app/src/server.ts` sends
+  `<meta name="color-scheme" content="light dark">` and zero inline/embedded
+  CSS colors (confirmed: `curl http://127.0.0.1:3000/` body has no `style=`
+  or `<style>` at all — the page cannot hardcode a light-only or dark-only
+  color because it declares none; per the CSS Color Adjustment spec, this
+  makes the browser apply its light or dark UA-default canvas/text colors
+  per the active theme, avoiding exactly the counterexample above. Attempted
+  real paired screenshots via Playwright/Chromium
+  (`npm install -g playwright && npx playwright install chromium`, then
+  launching with `colorScheme: "light"`/`"dark"`): the browser binary itself
+  installed, but launching it failed —
+  `chrome-headless-shell: error while loading shared libraries:
+  libglib-2.0.so.0: cannot open shared object file: No such file or
+  directory` — this container has no root/sudo (`sudo: command not found`;
+  `apt-get install` → "Unable to acquire the dpkg frontend lock ... are you
+  root?") to install the missing system library, so a real rendered
+  screenshot could not be captured in this invocation. Recording this
+  honestly as a tooling gap rather than asserting a screenshot that was not
+  taken.
 
 ## ui.i18n.no-hardcoded-copy — User-facing copy is externalized  [should]
 
@@ -122,7 +148,19 @@ Progress Log current.
   ("any interactivity"), so there are no interactive elements to audit for
   keyboard reachability; the applicable baseline narrows to text color
   contrast.
-- Status: PENDING
+- Status: MET (with the same recorded evidence gap as `ui.theming.dark-light`)
+  — No interactive elements exist to audit for keyboard reachability
+  (confirmed by inspecting the served HTML: one `<p>` element, no `<a>`,
+  `<button>`, `<input>`, or `tabindex`). Contrast: the page declares no CSS
+  colors at all (see `ui.theming.dark-light`), so text renders in the
+  browser's UA-default foreground/background pair for the active
+  color-scheme — canonically black-on-white or white-on-black, both ~21:1,
+  far above the WCAG AA baseline (4.5:1 for normal text) — this is a
+  deterministic property of the (empty) stylesheet, not something a browser
+  run is needed to compute. A live accessibility-audit tool run
+  (axe/Lighthouse) was not possible for the same reason recorded under
+  `ui.theming.dark-light`: no headless-browser capability in this container
+  (missing `libglib-2.0.so.0`, no root to install it).
 
 ## ai.surface.guardrails — AI/conversational surfaces have guardrails  [must]
 
@@ -149,7 +187,12 @@ Progress Log current.
 - Applies when: The product runs server or app code.
 - Applicability: `src/app/src/server.ts` runs a Fastify server (already uses
   `Fastify({ logger: true })`, i.e. pino, not `console.log`).
-- Status: PENDING
+- Status: MET — `grep -rn "console\." src/` returns nothing (exit 1, no
+  matches). `Fastify({ logger: { level: process.env.LOG_LEVEL ?? "info" } })`
+  emits structured JSON pino logs for every request, e.g. observed this
+  invocation: `{"level":30,...,"req":{"method":"GET","url":"/"},"msg":
+  "incoming request"}` and the matching `"request completed"` line with
+  `res.statusCode`.
 
 ## build.errors.handled — Errors surface with context, not swallowed  [must]
 
@@ -161,7 +204,14 @@ Progress Log current.
 - Applicability: `src/app/src/server.ts` runs a Fastify server. The current
   `.listen()` error path logs via `app.log.error(error)` and exits — this
   needs to be verified for the new `/` route too once implemented.
-- Status: PENDING
+- Status: MET — The `/` handler has no `try`/`catch` to swallow anything (it
+  cannot fail — it sends a constant string); an unmatched route is handled by
+  Fastify's default not-found handler, which returns a structured `404` and
+  is covered by `tests/unit/not-found.test.ts` (not silently dropped). The
+  startup path (`.listen().catch(...)`) still logs via `app.log.error(error)`
+  with the full error object (preserving the stack) before `process.exit(1)`
+  — unchanged, still correct, now exercised by the same server the `/` route
+  runs on.
 
 ## build.secrets.not-committed — No secrets in the diff  [must]
 
@@ -170,4 +220,8 @@ Progress Log current.
 - Evidence required: A secret scan of the diff returns clean.
 - Counterexample: An API key is committed in a config file.
 - Applies when: Always.
-- Status: PENDING
+- Status: MET — `git diff HEAD -- .` scanned for
+  `api[_-]?key|secret|password|token|BEGIN (RSA|OPENSSH|PRIVATE)` (excluding
+  the non-secret env-var names `LEET_DEPLOY_EDGE_SSH_*`/`LEET_DEPLOY_EDGE_TLS_EMAIL`
+  that appear only as documentation of variable names, never values) — no
+  matches.

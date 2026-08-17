@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildServer } from "../../src/app/src/server";
+import { buildServer } from "../../src/app/src/server.js";
 
 describe("root route", () => {
   it("returns the greeting", async () => {
